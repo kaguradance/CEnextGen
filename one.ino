@@ -5,8 +5,8 @@
 WiFiClient   espClient;
 PubSubClient client(espClient);             //สร้างออปเจ็ค สำหรับเชื่อมต่อ mqtt
 //=================================================================================================
-const char* ssid = "CE-ESL";               //wifi name
-const char* password = "ceeslonly";         //wifi password
+const char* ssid = "ชื่อ WiFi";               //wifi name
+const char* password = "รหัส WiFi";         //wifi password
 //=================================================================================================
 const char* mqtt_broker = "broker.hivemq.com";   //IP mqtt server
 const int   mqtt_port = 1883;               //port mqtt server
@@ -63,8 +63,8 @@ void setup()
   Serial.begin(115200);
   setup_wifi(); //เชื่อมต่อwifi
   reconnect();  //เชื่อมต่อmqtt
-  client.subscribe("CE_mqtt");  //กำหนด topic ที่จะ subscribe
-  client.publish("CE_arduino", "จุบุจุบุ"); //กำหนด topic ที่จะ publish และ valu
+  client.subscribe("topic ที่จะ sub");  //กำหนด topic ที่จะ subscribe
+  client.publish("topic ที่จะ pub", "จุบุจุบุ"); //กำหนด topic ที่จะ publish และ valu
 }
 
 void loop()
