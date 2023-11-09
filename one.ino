@@ -8,7 +8,7 @@ PubSubClient client(espClient);             //สร้างออปเจ็�
 const char* ssid = "ชื่อ WiFi";               //wifi name
 const char* password = "รหัส WiFi";         //wifi password
 //=================================================================================================
-const char* mqtt_broker = "broker.hivemq.com";   //IP mqtt server
+const char* mqtt_broker = "broker";   //IP mqtt server
 const int   mqtt_port = 1883;               //port mqtt server
 //=================================================================================================
 
