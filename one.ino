@@ -1,25 +1,24 @@
 #include <WiFi.h>
-#include <PubSubClient.h>
+#include <PubSubClient.h> //include library
 
 //=================================================================================================
-WiFiClient   espClient;
+WiFiClient   espClient;                     //คำสั่งจาก library
 PubSubClient client(espClient);             //สร้างออปเจ็ค สำหรับเชื่อมต่อ mqtt
 //=================================================================================================
-const char* ssid = "ชื่อ WiFi";               //wifi name
-const char* password = "รหัส WiFi";         //wifi password
+const char* ssid = "wifi name";                   //wifi name
+const char* password = "wifi password";           //wifi password
 //=================================================================================================
-const char* mqtt_broker = "broker";   //IP mqtt server
-const int   mqtt_port = 1883;               //port mqtt server
+const char* mqtt_broker = "IP mqtt server";       //IP mqtt server
+const int   mqtt_port = port mqtt server;         //port mqtt server
 //=================================================================================================
-
 
 void setup_wifi() {   //ฟังก์ชั่นเชื่อมต่อwifi
   delay(10);
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
-  WiFi.mode(WIFI_STA);              //เลือกโหมดรับ wifi
-  WiFi.begin(ssid, password);       //เชื่อมต่อ wifi
+  WiFi.mode(WIFI_STA);                      //เลือกโหมดรับ wifi
+  WiFi.begin(ssid, password);               //เชื่อมต่อ wifi
   while (WiFi.status() != WL_CONNECTED)     //รอจนกว่าจะเชื่อมต่อwifiสำเร็จ
   {
     delay(500);
@@ -34,7 +33,7 @@ void callback(char *topic, byte *payload, unsigned int length) {  //ฟังก
   Serial.print("Message arrived in topic: ");
   Serial.println(topic);
   Serial.print("Message:");
-  for (int i = 0; i < length; i++)
+  for (int i = 0; i < length; i++)          //รับค่าโดยการปริ้นอักษรที่ละตัวออกมา เป็น char
     Serial.print((char) payload[i]);
   Serial.println();
   Serial.println("-----------------------");
@@ -43,7 +42,7 @@ void callback(char *topic, byte *payload, unsigned int length) {  //ฟังก
 void reconnect() {  //ฟังก์ชั่นเชื่อมต่อmqtt
   client.setServer(mqtt_broker, mqtt_port);   //เชื่อมต่อmqtt
   client.setCallback(callback);               //เลือกฟังก์ชั่นsubscribe
-  while (!client.connected()) //รอจนกว่าจะเชื่อมต่อmqttสำเร็จ
+  while (!client.connected())                 //รอจนกว่าจะเชื่อมต่อmqttสำเร็จ
   {
     String client_id = "esp32-client-";
     client_id += String(WiFi.macAddress());
@@ -63,8 +62,8 @@ void setup()
   Serial.begin(115200);
   setup_wifi(); //เชื่อมต่อwifi
   reconnect();  //เชื่อมต่อmqtt
-  client.subscribe("topic ที่จะ sub");  //กำหนด topic ที่จะ subscribe
-  client.publish("topic ที่จะ pub", "จุบุจุบุ"); //กำหนด topic ที่จะ publish และ valu
+  client.subscribe("topic");  //กำหนด topic ที่จะ subscribe
+  client.publish("topic", "xxxxxxx"); //กำหนด topic ที่จะ publish และ valu
 }
 
 void loop()
