@@ -9,6 +9,8 @@ const char* ssid = "wifi name";                   //wifi name
 const char* password = "wifi password";           //wifi password
 //=================================================================================================
 const char* mqtt_broker = "IP mqtt server";       //IP mqtt server
+const char* mqtt_username = "mqtt username";      //mqtt username
+const char* mqtt_password = "mqtt password";      //mqtt password
 const int   mqtt_port = port mqtt server;         //port mqtt server
 //=================================================================================================
 
@@ -47,7 +49,7 @@ void reconnect() {  //ฟังก์ชั่นเชื่อมต่อmqtt
     String client_id = "esp32-client-";
     client_id += String(WiFi.macAddress());
     Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
-    if (client.connect(client_id.c_str()))
+    if (client.connect(client_id.c_str(), mqtt_username, mqtt_password))
       Serial.println("Public emqx mqtt broker connected");
     else {
       Serial.print("failed with state ");
